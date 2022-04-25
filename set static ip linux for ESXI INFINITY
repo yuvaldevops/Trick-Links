@@ -10,4 +10,5 @@ network:
      nameservers:
        addresses: [8.8.8.8,8.8.4.4]
 
-
+$ sudo netplan apply
+$ sudo netplan --debug apply
