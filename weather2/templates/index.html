@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather app</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+<!--  <p>{{d_list}}</p>-->
+	<div class="container">
+    <div class="card">
+        <div class="row">
+            <div class="col-9 left">
+                <div class="row top">
+                    <div class="col">{{city}}, {{country}}</div>
+                    <div class="col">{{full_date}}</div>
+                    <div class="col">
+                        <form class="input" action="/" method="post">
+                            <input name="q" type="text" placeholder="Search">
+                            <input type="submit" value="Go">
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7 temp">
+                        <img src={{icon}} alt="weather icon">
+                        {{current_temp}}&deg;
+                    </div>
+                    <div class="col-5 time">
+                        <p>{{current_hour}}</p>
+                        <h2><b>{{date}}</b></h2>
+                        <p>{{current_weather}}</p>
+                    </div>
+                </div>
+                <div class="row bottom">
+                    <div class="col">
+                        <hr class="mb-0">
+                        <div class="row">Day: </div>
+                        <div class="row">Night: </div>
+                        <div class="row">Humidity: </div>
+                    </div>
+                    {% for day in d_list %}
+                    <div class="col border">
+                        <div class="row">{{day['day_of_week']}}</div>
+<!--                        <br>-->
+                        <div class="row"><b>{{day['temp_of_week']}}&deg;</b></div>
+
+                        <div class="row"><b>{{day['temp_night']}}&deg;</b></div>
+
+                        <div class="row"><b>{{day['humidity']}}%</b></div>
+                    </div>
+                    {% endfor %}
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 right">
+                <div class="row top">For the day</div>
+                <div class="timely">
+                    {% for hour in hour_temps %}
+                        <div class="row">{{ hour["hour"] }} &nbsp; <b>{{ hour["temperature"] }}&deg;</b></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  </body>
+</html>
