@@ -1,0 +1,92 @@
+Started by GitLab push by yuval devops
+Obtained Jenkinsfile from git http://10.1.0.113/yuvaldevops/elbit.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on agent1 in /home/agent1/workspace/Vectorpipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential elbit_user_pass
+Fetching changes from the remote Git repository
+skipping resolution of commit remotes/origin/main, since it originates from another repository
+Checking out Revision fffe9f01cb235fcf613ab386af6acab9e1fedd9c (refs/remotes/origin/main)
+Commit message: "Update home.html"
+ > git rev-parse --resolve-git-dir /home/agent1/workspace/Vectorpipeline/.git # timeout=10
+ > git config remote.origin.url http://10.1.0.113/yuvaldevops/elbit.git # timeout=10
+Fetching upstream changes from http://10.1.0.113/yuvaldevops/elbit.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+using GIT_ASKPASS to set credentials elbit_user_pass
+ > git fetch --tags --force --progress -- http://10.1.0.113/yuvaldevops/elbit.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f fffe9f01cb235fcf613ab386af6acab9e1fedd9c # timeout=10
+ > git rev-list --no-walk fb6d65ee507f6092a80a688b3947b99d78072904 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (compress)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ head -n 1
++ git tag --sort=-creatordate
+[Pipeline] echo
+123
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] sh
++ zip -r web_artifact_123.zip main.py templates
+  adding: main.py (deflated 34%)
+  adding: templates/ (stored 0%)
+  adding: templates/home.html (deflated 27%)
+  adding: templates/.gitkeep (stored 0%)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (restart service)
+[Pipeline] sh
++ sudo systemctl stop webapp.service
+[Pipeline] sh
++ sudo systemctl start webapp.service
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (upload_artifact_to_artifactory)
+[Pipeline] sh
++ curl -u admin:Yuval2721995 -XPUT http://10.1.0.94:8082/artifactory/elbit/123/web_artifact_123.zip -T web_artifact.zip
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  1541    0   658  100   883   5576   7483 --:--:-- --:--:-- --:--:-- 13059
+{
+  "repo" : "elbit",
+  "path" : "/123/web_artifact_123.zip",
+  "created" : "2022-03-28T09:54:12.144Z",
+  "createdBy" : "admin",
+  "downloadUri" : "http://10.1.0.88/artifactory/elbit/123/web_artifact_123.zip",
+  "mimeType" : "application/zip",
+  "size" : "883",
+  "checksums" : {
+    "sha1" : "c7e9f3a045f20cb95b49bccd9fe834aecd6ac9c0",
+    "md5" : "c3d7b4463828e98cc8daf5a4706f9dfc",
+    "sha256" : "769840c37d4a9789620cab34493cbd814723a8253846b5d976afbc3fe2af16ed"
+  },
+  "originalChecksums" : {
+    "sha256" : "769840c37d4a9789620cab34493cbd814723a8253846b5d976afbc3fe2af16ed"
+  },
+  "uri" : "http://10.1.0.88/artifactory/elbit/123/web_artifact_123.zip"
+}
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
