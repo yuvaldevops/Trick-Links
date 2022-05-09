@@ -1,0 +1,8 @@
+#the first is cardenstials for yanko user
+[default]
+aws_access_key_id = AKIAUOKRBJKLIOVVBHPD
+aws_secret_access_key = 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
+
+[awsroot]
+aws_access_key_id = AKIAUOKRBJKLOX2V6MJQ
+aws_secret_access_key = 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
