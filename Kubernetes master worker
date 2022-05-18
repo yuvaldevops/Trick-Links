@@ -16,7 +16,7 @@ port מדבר על הפורט של הנוד
 nodePort גם כן מדבר על הפורט של הנוד כניראה שהם מפנים אחד לשני
 targetPort לאיזה פורט בפוד נפנה 
 
-SERVIE FILE
+SERVICE FILE
 apiVersion: v1
 kind: Service
 metadata:
