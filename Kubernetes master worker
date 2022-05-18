@@ -55,3 +55,26 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+        
+        
+        
+------קובץ אוטוסקיילינג------
+קובץ נפרד שכולל הוראות הורייזן סקייל
+נריץ אותו אחרי שהדיפלוי(הפודים) רצים
+
+piVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: autoscale
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment 
+    name: nginx-app #השם שנמצא ב מטא דאטה של קובץ הדיפלוי. משמש כדי לקשר בין האוטוסקייל לבין הדיפלוי
+  minReplicas: 3
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+
+
+
+
