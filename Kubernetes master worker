@@ -11,6 +11,36 @@ https://www.datree.io/resources/a-kubernetes-guide-for-labels-and-selectors
 שיהיה זהה בשינהם
 
 
+
+-----בקובץ של הדיפלןוימנט-----
+DEPLOYMENT FILE 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: karkeros/solitaire:nginx
+        ports:
+        - containerPort: 80
+        resources:
+          # You must specify requests for CPU to autoscale
+          # based on CPU utilization
+          requests:
+            cpu: "250m"
+            
+            
+
 -----בקובץ של הסרביס------
 port מדבר על הפורט של הנוד
 nodePort גם כן מדבר על הפורט של הנוד כניראה שהם מפנים אחד לשני
@@ -34,27 +64,8 @@ spec:
       nodePort: 30015
 
 
------בקובץ של הדיפלןוימנט-----
-DEPLOYMENT FILE 
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-app
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: 2 # tells deployment to run 2 pods matching the template
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
+
+
         
         
         
