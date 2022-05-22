@@ -4,7 +4,7 @@ https://www.datree.io/resources/a-kubernetes-guide-for-labels-and-selectors
 
 **** לא לשכוח לצאת מ רוט יוזר ולהפעיל עם SODU KUBECTL
 
-אחרי שהקמנו מאסר ווארקר נכין 3 קבצי יאמל
+אחרי שהקמנו מאסר ווארקר נכין 3 קבצי יאמל או שניצור קובץ אחד ונפריד בין הקטעים עם שלושה סימני מינוס 
 1. deplyment
 2. dervice
 3. autosclae
