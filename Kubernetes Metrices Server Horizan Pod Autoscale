@@ -1,3 +1,8 @@
+https://www.youtube.com/watch?v=PEs2ccoZ3ow&t=407s
+כדי לבצע אוטוסקייל צריך מטריקס סרבר כדי לקבל את המידע על הביצועים של הפודים
+v1.18.5המדריך מתאים לגירסאה 0.3.6 של מאטריס סרבר עם גירסת קוברנטיס
+
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
