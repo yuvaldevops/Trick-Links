@@ -1,0 +1,59 @@
+יצירת פיפליין בגילאב עם קוברנטיס כתשתית. 
+קודם כל צריך קוברנטיס קלאסטר מוכן
+צריך לבצע עליו את ההתקנות לפי הדוקומנטציה המקורית
+***חשוב לזכור כשאר נכנסים ל תשתיות ואז קוברנטיס קלאסטר אחרי לחיצה על יצירת קלאסטר יש להקיש שם לפי מה שנרצה ואז אנטר למרות שהממשק לא ניראה כממשקל שמקבל אינפוט
+
+
+הקובץ לא מוכן אך זאת התבנית בערך
+
+
+before_script:
+  - docker info
+
+
+build_image:
+  stage: build
+  script:
+      -echo build image stage
+
+deploy:
+    image:
+      name: bitnami/kubectl:latest
+      entrypoint: [""]
+    script:
+    - kubectl config get-contexts
+    - kubectl config use-context CICD:agent
+    - kubectl get pods
+
+
+
+
+
+
+build-job:
+  stage: build
+  script:
+    #- docker login -u yuvaldevops -p GR1348941-tQy8A8Nuy1ywCBDfM5C
+    #- docker tag 
+    - docker login -u yuvaldevops -p Yuval2721995
+    #- docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push yuvaldevops/webapp:latest
+
+test-job1:
+  stage: test
+  script: 
+    - docker run -d yuvaldevops/webapp:latest
+
+test-job2:
+  stage: test
+  script:
+    - echo "This job tests something, but takes more time than test-job1."
+    - echo "After the echo commands complete, it runs the sleep command for 20 seconds"
+    - echo "which simulates a test that runs 3 seconds longer than test-job1"
+    - sleep 3
+
+deploy-prod:
+  stage: deploy
+  script:
+    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch."
+
