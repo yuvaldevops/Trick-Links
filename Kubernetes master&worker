@@ -1,6 +1,7 @@
 https://github.com/justmeandopensource/kubernetes/blob/master/docs/install-cluster-ubuntu-20.md
 https://www.youtube.com/watch?v=qmDzcu5uY1I
 https://www.datree.io/resources/a-kubernetes-guide-for-labels-and-selectors
+https://www.youtube.com/watch?v=PEs2ccoZ3ow metric server לראות את הקובץ בדקה 13:00 שם הוא מעודכן
 
 **** לא לשכוח לצאת מ רוט יוזר ולהפעיל עם SODU KUBECTL
 
@@ -13,8 +14,8 @@ https://www.datree.io/resources/a-kubernetes-guide-for-labels-and-selectors
 שיהיה זהה בשינהם
 *החיבוא לאוטוסקייל לא יהיה עם לייבל
 
-
-
+metric server כדי שהמאסטר יוכל לנטר את המשאבים של פודים אחרים נצטרך להתקין
+שזה קלאסטר נוסף של קוברנטיס 
 -----בקובץ של הדיפלןוימנט-----
 DEPLOYMENT FILE 
 apiVersion: apps/v1
