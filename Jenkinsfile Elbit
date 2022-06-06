@@ -1,0 +1,36 @@
+pipeline {
+
+    agent { 
+        label 'agent1'
+    } 
+        stages {
+            stage("compress") {
+                steps {
+                    script{
+                        lastTag = sh (returnStdout: true, script: "git tag --sort=-creatordate | head -n 1").trim()
+                        echo lastTag
+                    }
+                    sh "zip -r web_artifact_${lastTag}.zip main.py templates"
+
+                }
+            }
+
+            stage("restart service") {
+                steps {
+                    sh "sudo systemctl stop webapp.service"
+                    sh "sudo systemctl start webapp.service"
+
+                }
+            }
+              
+
+            stage("upload_artifact_to_artifactory") {
+                steps {
+
+                    
+                    sh "curl -u admin:Yuval2721995 -XPUT http://10.1.0.94:8082/artifactory/elbit/${lastTag}/web_artifact_${lastTag}.zip -T web_artifact.zip" 
+                }
+            }  
+        }
+
+}
