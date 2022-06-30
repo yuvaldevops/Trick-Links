@@ -1,0 +1,3 @@
+sudo netstat -tulpn | grep LISTEN - מוצאה איזה סרביסים פתוחים על איזה פורטים
+
+sudo netstat -tunlp 
