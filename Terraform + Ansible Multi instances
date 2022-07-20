@@ -70,10 +70,10 @@ resource "google_compute_firewall" "default" {
 resource "google_compute_instance" "nginx" {
   for_each = local.web_servers
 
-  name         = "nginx"
-  machine_type = "e2-standard-2"
-  zone         = "us-east1-b"
-
+  name         = each.key
+  machine_type = each.value.machine_type
+  zone         = each.value.zone
+  
   boot_disk {
     initialize_params {
       image = "ubuntu-minimal-1804-lts"
